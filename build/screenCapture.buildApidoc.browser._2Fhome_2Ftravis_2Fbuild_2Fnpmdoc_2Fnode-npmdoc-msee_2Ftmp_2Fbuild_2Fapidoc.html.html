@@ -1,0 +1,297 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/firede/msee#readme">msee (v0.3.3)</a>
+</h1>
+<h4>Msee is a command-line tool to read Markdown file in your terminal, and it's a library help your command-line software to output readable markdown content.</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.msee">module msee</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.msee.parse">
+            function <span class="apidocSignatureSpan">msee.</span>parse
+            <span class="apidocSignatureSpan">(text, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.msee.parseFile">
+            function <span class="apidocSignatureSpan">msee.</span>parseFile
+            <span class="apidocSignatureSpan">(file, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.</span>syntaxColor</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.msee.syntaxColor">module msee.syntaxColor</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.msee.syntaxColor._default">
+            function <span class="apidocSignatureSpan">msee.syntaxColor.</span>_default
+            <span class="apidocSignatureSpan">(s)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Block</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Boolean</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Identifier</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Keyword</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Line</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Null</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Numeric</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Punctuator</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.syntaxColor.</span>String</span>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.msee" id="apidoc.module.msee">module msee</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.msee.parse" id="apidoc.element.msee.parse">
+        function <span class="apidocSignatureSpan">msee.</span>parse
+        <span class="apidocSignatureSpan">(text, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">parse = function (text, options) {
+    tokens = marked.lexer(text);
+    inline = new marked.InlineLexer(tokens.links);
+    options = xtend(defaultOptions, options);
+
+    var outputArr = [];
+    var output;
+
+    if (options.maxWidth !== -1 &amp;&amp; options.width &gt; options.maxWidth) {
+        options.width = options.maxWidth
+    }
+
+    while (next()) {
+        outputArr.push(processToken(options));
+    }
+
+    if (options.collapseNewlines) {
+        output = outputArr.join('').replace(/\n\n\n/g, '\n\n');
+    }
+
+    tokens = null;
+    token = null;
+
+    return output;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+## API
+
+```javascript
+var msee = require('msee');
+
+// parse markdown text
+msee.<span class="apidocCodeKeywordSpan">parse</span>('&gt; hello world!');
+
+// parse markdown file
+msee.parseFile('~/doc/readme.md');
+```
+
+## Contributors
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.msee.parseFile" id="apidoc.element.msee.parseFile">
+        function <span class="apidocSignatureSpan">msee.</span>parseFile
+        <span class="apidocSignatureSpan">(file, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">parseFile = function (file, options) {
+    var filePath = path.resolve(__dirname, file);
+    var ret = '';
+
+    try {
+        var text = fs.readFileSync(filePath).toString();
+        ret = exports.parse(text, options);
+    }
+    catch (e) {
+        throw e;
+    }
+
+    return ret;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```javascript
+var msee = require('msee');
+
+// parse markdown text
+msee.parse('&gt; hello world!');
+
+// parse markdown file
+msee.<span class="apidocCodeKeywordSpan">parseFile</span>('~/doc/readme.md');
+```
+
+## Contributors
+
+https://github.com/firede/msee/graphs/contributors
+
+## License
+...</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.msee.syntaxColor" id="apidoc.module.msee.syntaxColor">module msee.syntaxColor</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.msee.syntaxColor._default" id="apidoc.element.msee.syntaxColor._default">
+        function <span class="apidocSignatureSpan">msee.syntaxColor.</span>_default
+        <span class="apidocSignatureSpan">(s)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">_default = function (s) {
+  return o + s + c;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
