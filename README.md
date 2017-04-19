@@ -1,9 +1,14 @@
-# api documentation for  [msee (v0.3.3)](https://github.com/firede/msee#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-msee.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-msee) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-msee.svg)](https://travis-ci.org/npmdoc/node-npmdoc-msee)
+# npmdoc-msee
+
+#### api documentation for  [msee (v0.3.3)](https://github.com/firede/msee#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-msee.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-msee) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-msee.svg)](https://travis-ci.org/npmdoc/node-npmdoc-msee)
+
 #### Msee is a command-line tool to read Markdown file in your terminal, and it's a library help your command-line software to output readable markdown content.
 
-[![NPM](https://nodei.co/npm/msee.png?downloads=true)](https://www.npmjs.com/package/msee)
+[![NPM](https://nodei.co/npm/msee.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/msee)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-msee/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-msee_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-msee/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-msee/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-msee/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-msee/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-msee/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-msee/build/screenCapture.npmPackageListing.svg)
 
@@ -17,8 +22,7 @@
 
 {
     "author": {
-        "name": "Firede",
-        "email": "firede@firede.us"
+        "name": "Firede"
     },
     "bin": {
         "msee": "./bin/msee"
@@ -28,8 +32,7 @@
     },
     "contributors": [
         {
-            "name": "Martin Heidegger",
-            "email": "martin.heidegger@gmail.com"
+            "name": "Martin Heidegger"
         }
     ],
     "dependencies": {
@@ -72,17 +75,14 @@
     "main": "./lib/msee.js",
     "maintainers": [
         {
-            "name": "firede",
-            "email": "firede@firede.us"
+            "name": "firede"
         },
         {
-            "name": "leichtgewicht",
-            "email": "martin.heidegger@gmail.com"
+            "name": "leichtgewicht"
         }
     ],
     "name": "msee",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/firede/msee.git"
@@ -92,135 +92,6 @@
     },
     "version": "0.3.3"
 }
-```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module msee](#apidoc.module.msee)
-1.  [function <span class="apidocSignatureSpan">msee.</span>parse (text, options)](#apidoc.element.msee.parse)
-1.  [function <span class="apidocSignatureSpan">msee.</span>parseFile (file, options)](#apidoc.element.msee.parseFile)
-1.  object <span class="apidocSignatureSpan">msee.</span>syntaxColor
-
-#### [module msee.syntaxColor](#apidoc.module.msee.syntaxColor)
-1.  [function <span class="apidocSignatureSpan">msee.syntaxColor.</span>_default (s)](#apidoc.element.msee.syntaxColor._default)
-1.  object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Block
-1.  object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Boolean
-1.  object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Identifier
-1.  object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Keyword
-1.  object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Line
-1.  object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Null
-1.  object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Numeric
-1.  object <span class="apidocSignatureSpan">msee.syntaxColor.</span>Punctuator
-1.  object <span class="apidocSignatureSpan">msee.syntaxColor.</span>String
-
-
-
-# <a name="apidoc.module.msee"></a>[module msee](#apidoc.module.msee)
-
-#### <a name="apidoc.element.msee.parse"></a>[function <span class="apidocSignatureSpan">msee.</span>parse (text, options)](#apidoc.element.msee.parse)
-- description and source-code
-```javascript
-parse = function (text, options) {
-    tokens = marked.lexer(text);
-    inline = new marked.InlineLexer(tokens.links);
-    options = xtend(defaultOptions, options);
-
-    var outputArr = [];
-    var output;
-
-    if (options.maxWidth !== -1 && options.width > options.maxWidth) {
-        options.width = options.maxWidth
-    }
-
-    while (next()) {
-        outputArr.push(processToken(options));
-    }
-
-    if (options.collapseNewlines) {
-        output = outputArr.join('').replace(/\n\n\n/g, '\n\n');
-    }
-
-    tokens = null;
-    token = null;
-
-    return output;
-}
-```
-- example usage
-```shell
-...
-
-## API
-
-'''javascript
-var msee = require('msee');
-
-// parse markdown text
-msee.parse('> hello world!');
-
-// parse markdown file
-msee.parseFile('~/doc/readme.md');
-'''
-
-## Contributors
-...
-```
-
-#### <a name="apidoc.element.msee.parseFile"></a>[function <span class="apidocSignatureSpan">msee.</span>parseFile (file, options)](#apidoc.element.msee.parseFile)
-- description and source-code
-```javascript
-parseFile = function (file, options) {
-    var filePath = path.resolve(__dirname, file);
-    var ret = '';
-
-    try {
-        var text = fs.readFileSync(filePath).toString();
-        ret = exports.parse(text, options);
-    }
-    catch (e) {
-        throw e;
-    }
-
-    return ret;
-}
-```
-- example usage
-```shell
-...
-'''javascript
-var msee = require('msee');
-
-// parse markdown text
-msee.parse('> hello world!');
-
-// parse markdown file
-msee.parseFile('~/doc/readme.md');
-'''
-
-## Contributors
-
-https://github.com/firede/msee/graphs/contributors
-
-## License
-...
-```
-
-
-
-# <a name="apidoc.module.msee.syntaxColor"></a>[module msee.syntaxColor](#apidoc.module.msee.syntaxColor)
-
-#### <a name="apidoc.element.msee.syntaxColor._default"></a>[function <span class="apidocSignatureSpan">msee.syntaxColor.</span>_default (s)](#apidoc.element.msee.syntaxColor._default)
-- description and source-code
-```javascript
-_default = function (s) {
-  return o + s + c;
-}
-```
-- example usage
-```shell
-n/a
 ```
 
 
