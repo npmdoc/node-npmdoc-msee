@@ -81,7 +81,35 @@
 
         <li>
 
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan"></span>msee</span>
+
+        </li>
+
+        <li>
+
             <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">msee.</span>syntaxColor</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.msee.msee">module msee.msee</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.msee.msee.parse">
+            function <span class="apidocSignatureSpan">msee.msee.</span>parse
+            <span class="apidocSignatureSpan">(text, options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.msee.msee.parseFile">
+            function <span class="apidocSignatureSpan">msee.msee.</span>parseFile
+            <span class="apidocSignatureSpan">(file, options)</span>
+            </a>
 
         </li>
 
@@ -253,6 +281,107 @@ https://github.com/firede/msee/graphs/contributors
     </ul>
 
 
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.msee.msee" id="apidoc.module.msee.msee">module msee.msee</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.msee.msee.parse" id="apidoc.element.msee.msee.parse">
+        function <span class="apidocSignatureSpan">msee.msee.</span>parse
+        <span class="apidocSignatureSpan">(text, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">parse = function (text, options) {
+    tokens = marked.lexer(text);
+    inline = new marked.InlineLexer(tokens.links);
+    options = xtend(defaultOptions, options);
+
+    var outputArr = [];
+    var output;
+
+    if (options.maxWidth !== -1 &#x26;&#x26; options.width &#x3e; options.maxWidth) {
+        options.width = options.maxWidth
+    }
+
+    while (next()) {
+        outputArr.push(processToken(options));
+    }
+
+    if (options.collapseNewlines) {
+        output = outputArr.join(&#x27;&#x27;).replace(/\n\n\n/g, &#x27;\n\n&#x27;);
+    }
+
+    tokens = null;
+    token = null;
+
+    return output;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+
+## API
+
+```javascript
+var msee = require(&#x27;msee&#x27;);
+
+// parse markdown text
+msee.<span class="apidocCodeKeywordSpan">parse</span>(&#x27;&#x3e; hello world!&#x27;);
+
+// parse markdown file
+msee.parseFile(&#x27;~/doc/readme.md&#x27;);
+```
+
+## Contributors
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.msee.msee.parseFile" id="apidoc.element.msee.msee.parseFile">
+        function <span class="apidocSignatureSpan">msee.msee.</span>parseFile
+        <span class="apidocSignatureSpan">(file, options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">parseFile = function (file, options) {
+    var filePath = path.resolve(__dirname, file);
+    var ret = &#x27;&#x27;;
+
+    try {
+        var text = fs.readFileSync(filePath).toString();
+        ret = exports.parse(text, options);
+    }
+    catch (e) {
+        throw e;
+    }
+
+    return ret;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+```javascript
+var msee = require(&#x27;msee&#x27;);
+
+// parse markdown text
+msee.parse(&#x27;&#x3e; hello world!&#x27;);
+
+// parse markdown file
+msee.<span class="apidocCodeKeywordSpan">parseFile</span>(&#x27;~/doc/readme.md&#x27;);
+```
+
+## Contributors
+
+https://github.com/firede/msee/graphs/contributors
+
+## License
+...</pre></li>
+    </ul>
 
 
 </div>
